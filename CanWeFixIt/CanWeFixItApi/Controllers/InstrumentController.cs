@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CanWeFixItService;
+using CanWeFixItService.Data;
+using CanWeFixItService.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CanWeFixItApi.Controllers
@@ -17,6 +18,7 @@ namespace CanWeFixItApi.Controllers
         }
         
         // GET
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<Instrument>>> Get()
         {   
             return Ok(_database.Instruments().Result);
