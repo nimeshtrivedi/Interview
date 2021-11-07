@@ -8,7 +8,13 @@ namespace CanWeFixItApi.MappingProfiles
     {
         public MappingProfile()
         {
-            CreateMap<InstrumentDto, Instrument>().ReverseMap();
+            CreateMap<Instrument, InstrumentDto>().ReverseMap();
+            CreateMap<MarketValuation, MarketValuationDto>().ReverseMap();
+            CreateMap<MarketData, MarketDataDto>()  //MarketDataDto expects InstrumentId based on Sedol Value -- Custom resolver will extract value from database
+                .ForMember(dest => dest.InstrumentId, o =>
+                {
+                    o.MapFrom<CustomResolver, string>(src => src.Sedol);
+                });
         }
     }
 }

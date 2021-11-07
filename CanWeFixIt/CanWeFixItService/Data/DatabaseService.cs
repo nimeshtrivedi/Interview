@@ -34,7 +34,7 @@ namespace CanWeFixItService.Data
 
         public async Task<IEnumerable<MarketData>> MarketData()
         {
-            return await _connection.QueryAsync<MarketData>("SELECT Id, DataValue FROM MarketData WHERE Active = 0");
+            return await _connection.QueryAsync<MarketData>("SELECT Id, DataValue, Sedol, Active FROM MarketData WHERE Active = 1");
         }
 
         /// <summary>
