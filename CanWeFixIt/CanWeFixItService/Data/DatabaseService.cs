@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Threading.Tasks;
 using CanWeFixItService.Entities;
 using Dapper;
@@ -9,21 +10,16 @@ namespace CanWeFixItService.Data
 {
     public class DatabaseService : IDatabaseService
     {
-        // See SQLite In-Memory example:
-        // https://github.com/dotnet/docs/blob/main/samples/snippets/standard/data/sqlite/InMemorySample/Program.cs
-
-        // Using a name and a shared cache allows multiple connections to access the same
-        // in-memory database
-        const string connectionString = "Data Source=DatabaseService;Mode=Memory;Cache=Shared";
         private readonly ILogger _logger;
-        private SqliteConnection _connection;
+        private readonly IDbConnection _connection;
 
-        public DatabaseService(ILogger logger)
+
+        public DatabaseService(IDbConnection connection, ILogger logger)
         {
             // The in-memory database only persists while a connection is open to it. To manage
             // its lifetime, keep one open connection around for as long as you need it.
             _logger = logger;
-            _connection = new SqliteConnection(connectionString);
+            _connection = connection;
             _connection.Open();
         }
 

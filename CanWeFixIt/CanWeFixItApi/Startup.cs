@@ -7,6 +7,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using CanWeFixItApi.MappingProfiles;
+using System.Data;
+using Microsoft.Data.Sqlite;
 
 namespace CanWeFixItApi
 {
@@ -37,6 +39,7 @@ namespace CanWeFixItApi
             services.AddSingleton(typeof(ILogger), typeof(Logger<Startup>));
             services.AddSingleton<IDatabaseService, DatabaseService>();
             services.AddAutoMapper(typeof(MappingProfile).Assembly);
+            services.AddSingleton<IDbConnection>(db => new SqliteConnection(Configuration.GetConnectionString("SqliteConnectionString")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
