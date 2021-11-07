@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CanWeFixItService.Entities;
 using Dapper;
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.Logging;
 
 namespace CanWeFixItService.Data
 {
@@ -14,19 +15,21 @@ namespace CanWeFixItService.Data
         // Using a name and a shared cache allows multiple connections to access the same
         // in-memory database
         const string connectionString = "Data Source=DatabaseService;Mode=Memory;Cache=Shared";
+        private readonly ILogger _logger;
         private SqliteConnection _connection;
 
-        public DatabaseService()
+        public DatabaseService(ILogger logger)
         {
             // The in-memory database only persists while a connection is open to it. To manage
             // its lifetime, keep one open connection around for as long as you need it.
+            _logger = logger;
             _connection = new SqliteConnection(connectionString);
             _connection.Open();
         }
 
         public async Task<IEnumerable<Instrument>> Instruments()
         {
-            return await _connection.QueryAsync<Instrument>("SQL GOES HERE");
+            return await _connection.QueryAsync<Instrument>("Select Id, Sedol, Name, Active From Instrument Where Active = 1");
         }
 
         public async Task<IEnumerable<MarketData>> MarketData()
@@ -60,7 +63,7 @@ namespace CanWeFixItService.Data
                        (9, 'Sedol9', 'Name9', 0)";
 
             _connection.Execute(createInstruments);
-
+            _logger.LogInformation($"Executed :{createInstruments}");
             const string createMarketData = @"
                 CREATE TABLE marketdata
                 (
@@ -78,6 +81,7 @@ namespace CanWeFixItService.Data
                        (6, 6666, 'Sedol6', 1)";
 
             _connection.Execute(createMarketData);
+            _logger.LogInformation($"Executed :{createMarketData}");
         }
     }
 }

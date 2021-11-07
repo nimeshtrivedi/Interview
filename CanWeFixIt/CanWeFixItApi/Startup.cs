@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using CanWeFixItApi.MappingProfiles;
 
 namespace CanWeFixItApi
 {
@@ -25,7 +27,16 @@ namespace CanWeFixItApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CanWeFixItApi", Version = "v1" });
             });
+            
+            services.AddLogging(config =>
+            {
+                config.AddDebug();
+                config.AddConsole();
+            });
+            
+            services.AddSingleton(typeof(ILogger), typeof(Logger<Startup>));
             services.AddSingleton<IDatabaseService, DatabaseService>();
+            services.AddAutoMapper(typeof(MappingProfile).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

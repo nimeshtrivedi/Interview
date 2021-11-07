@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CanWeFixItApi.Controllers
 {
     [ApiController]
-    [Route("v2/marketdata")]
+    [Route("v1/marketdata")]
     public class MarketDataController : ControllerBase
     {
         // GET
@@ -15,7 +15,7 @@ namespace CanWeFixItApi.Controllers
         {
             // TODO:
 
-            return NotFound();
+            return Ok(new List<MarketDataDto>());
         }
     }
 }
