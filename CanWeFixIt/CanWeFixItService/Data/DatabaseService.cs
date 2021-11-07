@@ -37,6 +37,12 @@ namespace CanWeFixItService.Data
             return await _connection.QueryAsync<MarketData>("SELECT Id, DataValue, Sedol, Active FROM MarketData WHERE Active = 1");
         }
 
+        public async Task<IEnumerable<MarketValuation>> MarketValuations()
+        {
+            var marketValuation = await _connection.QueryAsync<MarketValuation>("SELECT 'DataValueTotal' as 'Name', Sum(DataValue) as 'Total' FROM MarketData WHERE Active = 1");
+            return marketValuation;
+        }
+
         /// <summary>
         /// This is complete and will correctly load the test data.
         /// It is called during app startup 
