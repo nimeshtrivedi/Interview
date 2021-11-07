@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using CanWeFixItEntities;
+using CanWeFixItEntities.Dtos;
 using CanWeFixItService.Data;
 using System.Linq;
 
 namespace CanWeFixItApi.MappingProfiles
 {
-    public class CustomResolver : IMemberValueResolver<object, object, string, int?>
+    public class CustomResolver : IMemberValueResolver<MarketData, MarketDataDto, string, int?>
     {
         private readonly IDatabaseService _db;
 
@@ -12,7 +14,7 @@ namespace CanWeFixItApi.MappingProfiles
         {
             _db = db;
         }
-        public int? Resolve(object source, object destination, string sourceMember, int? destMember, ResolutionContext context)
+        public int? Resolve(MarketData source, MarketDataDto destination, string sourceMember, int? destMember, ResolutionContext context)
         {
             return _db.Instruments().GetAwaiter().GetResult().FirstOrDefault(d => d.Sedol == sourceMember)?.Id;
         }
