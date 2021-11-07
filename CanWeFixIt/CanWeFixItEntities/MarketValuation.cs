@@ -1,4 +1,4 @@
-namespace CanWeFixItService.Entities
+namespace CanWeFixItEntities
 {
     public class MarketValuation
     {

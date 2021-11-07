@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using CanWeFixItService.Entities;
-using CanWeFixItService.Entities.Dtos;
+using CanWeFixItEntities;
+using CanWeFixItEntities.Dtos;
 
 namespace CanWeFixItApi.MappingProfiles
 {

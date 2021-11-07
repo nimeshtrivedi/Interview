@@ -1,4 +1,4 @@
-﻿using CanWeFixItService.Entities;
+﻿using CanWeFixItEntities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

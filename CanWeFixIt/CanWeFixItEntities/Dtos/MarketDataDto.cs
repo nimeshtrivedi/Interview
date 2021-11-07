@@ -1,4 +1,4 @@
-﻿namespace CanWeFixItService.Entities.Dtos
+﻿namespace CanWeFixItEntities.Dtos
 {
     public class MarketDataDto
     {

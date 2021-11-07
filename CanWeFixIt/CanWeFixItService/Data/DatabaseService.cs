@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
-using CanWeFixItService.Entities;
+using CanWeFixItEntities;
 using Dapper;
-using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Logging;
 
 namespace CanWeFixItService.Data

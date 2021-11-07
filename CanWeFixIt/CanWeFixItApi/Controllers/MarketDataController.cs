@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using CanWeFixItEntities;
+using CanWeFixItEntities.Dtos;
 using CanWeFixItService.Data;
-using CanWeFixItService.Entities;
-using CanWeFixItService.Entities.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CanWeFixItApi.Controllers

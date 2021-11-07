@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using CanWeFixItEntities;
+using CanWeFixItEntities.Dtos;
 using CanWeFixItService.Data;
-using CanWeFixItService.Entities;
-using CanWeFixItService.Entities.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
